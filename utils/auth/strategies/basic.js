@@ -6,16 +6,17 @@ const { config } = require('../../../config');
 
 passport.use(new BasicStrategy( async function(email, password, cb) {
   try {
+    console.log(config.apiUrl);
     const { data, status } = await axios({
-      url: `${config.apiUrl}/api/auth/sign-in`,
       method: 'post',
+      url: `${config.apiUrl}/api/auth/sign-in`,
+      data: {
+        apiKeyToken: config.apiKeyToken
+      },
       auth: {
         password,
         username: email,
       },
-      data: {
-        apiKeyToken: config.apiKeyToken
-      }
     });
 
     if (!data || status != 200) {
