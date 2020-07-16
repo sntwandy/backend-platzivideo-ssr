@@ -3,6 +3,7 @@ const passport = require('passport');
 const boom = require('@hapi/boom');
 const cookieParser = require('cookie-parser');
 const axios = require('axios');
+const helmet = require('helmet');
 
 const THIRTY_DAYS_IN_SEC = 2592000000;
 const TWO_HOURS_IN_SEC = 7200000;
@@ -13,6 +14,7 @@ const app = express();
 
 // Body Parser
 app.use(express.json());
+app.use(helmet());
 app.use(cookieParser());
 
 // Basic Strategy
